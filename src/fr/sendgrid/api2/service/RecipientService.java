@@ -76,7 +76,7 @@ public class RecipientService {
 	public List<RecipientFromCsvFile> RetrieveAllRecipientsFromCsvFile() {
 		
 		final List<RecipientFromCsvFile> recipientsFromCsvFileList = new ArrayList<RecipientFromCsvFile>();
-		final List<Map<String,String>> mappedData = csvFile.getMappedData();
+		final List<Map<String,String>> mappedData = this.csvFile.getMappedData();
 		
 		for(Map<String,String> map : mappedData) {
 			final RecipientFromCsvFile recipientFromCsvFile = mapToContact(map);

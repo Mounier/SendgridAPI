@@ -1,21 +1,13 @@
 package fr.sendgrid.api2.service;
 import java.io.IOException;
-import java.sql.Time;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.sendgrid.Content;
-import com.sendgrid.Email;
-import com.sendgrid.Mail;
 import com.sendgrid.Method;
 import com.sendgrid.Request;
 import com.sendgrid.Response;
 import com.sendgrid.SendGrid;
-import com.sendgrid.smtpapi.SMTPAPI;
-
 import fr.sendgrid.api2.domain.Campaign;
 
 public class CampaignService {
