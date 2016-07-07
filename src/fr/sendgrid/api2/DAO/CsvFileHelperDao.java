@@ -1,4 +1,4 @@
-package fr.sendgrid.api2.service;
+package fr.sendgrid.api2.DAO;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CsvFileHelper {
+public class CsvFileHelperDao {
 
 	public static List<String> readFile(File file) throws IOException {
 		List<String> result = new ArrayList<String>();

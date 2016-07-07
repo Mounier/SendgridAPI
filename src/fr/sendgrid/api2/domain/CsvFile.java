@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import fr.sendgrid.api2.service.CsvFileHelper;
+import fr.sendgrid.api2.DAO.CsvFileHelperDao;
 
 public class CsvFile {
 	public final static char SEPARATOR = ';';
@@ -29,7 +29,7 @@ public class CsvFile {
 	}
 	
 	private void init() throws IOException {
-		lines = CsvFileHelper.readFile(file);
+		lines = CsvFileHelperDao.readFile(file);
 		data = new ArrayList<String[] >(lines.size());
 		String separator = new Character(SEPARATOR).toString();
 		boolean first=true;
@@ -68,7 +68,7 @@ public class CsvFile {
         for (String[] oneData : data) {
             final Map<String, String> map = new HashMap<String, String>();
             for (int i = 0; i < titlesLength; i++) {
-                final String key = CsvFileHelper.cleanKey(titles[i]);
+                final String key = CsvFileHelperDao.cleanKey(titles[i]);
                 final String value = oneData[i];
                 map.put(key, value);
             }
