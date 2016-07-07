@@ -19,7 +19,7 @@ public class Main {
 		System.out.println("Retrieving the csv file...");
 		File file = CsvFileHelperDao.getRessource(FILE_NAME);
 		RecipientService recipientService = new RecipientService(apiKey,file);	//ce sera à partir de cet objet qu'on fera toute les opérations sur les contacts/recipients
-/*		
+	
 		System.out.println(
 				"\n\n***************************************************************************************************************************************************************************************");
 		System.out.println(
@@ -28,11 +28,11 @@ public class Main {
 				"***************************************************************************************************************************************************************************************");
 		
 //		On met les contacts dans une liste
-		system.out.println("Putting recipients in a list...");
+		System.out.println("Putting recipients in a list...");
 		List<RecipientFromCsvFile> recipientsFromCsvList = new ArrayList<RecipientFromCsvFile>();
 		recipientsFromCsvList = recipientService.RetrieveAllRecipientsFromCsvFile();
 		System.out.println(recipientsFromCsvList);
-*/
+
 		
 /*		
 		System.out.println(

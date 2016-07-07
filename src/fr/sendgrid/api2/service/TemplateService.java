@@ -36,8 +36,21 @@ public class TemplateService {
 		this.apiKey = pApiKey;
 	}
 
-	public void createNewTransactionalTemplateVersion () {
-		System.out.println("TODO");
+	public void createNewTransactionalTemplateVersion (String versionName, String htmlContent, String plainContent, String templateId, String subject) throws IOException {
+		
+		 try {
+			    SendGrid sg = new SendGrid(this.apiKey);
+			    Request request = new Request();
+			    request.method = Method.POST;
+			    request.endpoint = "templates/{template_id}/versions";
+			    request.body = "{\"name\":\" "+ versionName +" \",\"html_content\":\" "+ htmlContent +" \",\"plain_content\":\" "+ plainContent +" \",\"active\":1,\"template_id\":\" "+ templateId +" \",\"subject\":\" "+ subject +" \"}";
+			    Response response = sg.api(request);
+			    System.out.println(response.statusCode);
+			    System.out.println(response.body);
+			    System.out.println(response.headers);
+			  } catch (IOException ex) {
+			    throw ex;
+			  }
 	}
 	
 	public List<Template> retrieveAllTemplates() throws JSONException {
