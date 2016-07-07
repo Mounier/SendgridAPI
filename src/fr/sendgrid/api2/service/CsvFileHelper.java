@@ -1,4 +1,4 @@
-package fr.sendgrid.api2.domain;
+package fr.sendgrid.api2.service;
 
 import java.io.BufferedReader;
 import java.io.File;

@@ -13,11 +13,11 @@ import com.sendgrid.Request;
 import com.sendgrid.Response;
 import com.sendgrid.SendGrid;
 
-import fr.sendgrid.api2.domain.CsvFileHelper;
 import fr.sendgrid.api2.domain.RecipientFromCsvFile;
 import fr.sendgrid.api2.domain.RecipientFromSendgrid;
 import fr.sendgrid.api2.domain.Template;
 import fr.sendgrid.api2.service.Block;
+import fr.sendgrid.api2.service.CsvFileHelper;
 import fr.sendgrid.api2.service.Invalid;
 import fr.sendgrid.api2.service.RecipientService;
 import fr.sendgrid.api2.service.Spam;
@@ -56,6 +56,7 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 
+//		Récupération des contacts contenu dans le fichier csv dans une liste
 		final String FILE_NAME = "C:\\liste_contact.csv";
 		File file = CsvFileHelper.getRessource(FILE_NAME);
 		List<RecipientFromCsvFile> recipientFromCsvList = new ArrayList<RecipientFromCsvFile>();

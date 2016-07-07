@@ -23,7 +23,6 @@ import fr.sendgrid.api2.domain.CsvFile;
 import fr.sendgrid.api2.domain.RecipientFromCsvFile;
 import fr.sendgrid.api2.domain.RecipientFromSendgrid;
 
-
 public class RecipientService {
 	
 	protected CsvFile csvFile;
