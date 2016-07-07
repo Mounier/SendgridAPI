@@ -20,24 +20,31 @@ import fr.sendgrid.api2.domain.Template;
 public class TemplateService {
 
 	protected Template template = new Template();
+	protected String apiKey;
 
 	public TemplateService() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public TemplateService(Template pTemplate) {
+	public TemplateService(String pApiKey) {
 		super();
-		template = pTemplate;
+		this.apiKey = pApiKey;
+	}
+	
+	public TemplateService(String pApiKey, Template pTemplate) {
+		super();
+		this.template = pTemplate;
+		this.apiKey = pApiKey;
 	}
 
-	public void createNewTransactionalTemplateVersion (String pApiKey, Template pTemplate) {
+	public void createNewTransactionalTemplateVersion () {
 		System.out.println("TODO");
 	}
 	
-	public List<Template> retrieveAllTemplates(String pApiKey) throws JSONException {
+	public List<Template> retrieveAllTemplates() throws JSONException {
 
-		SendGrid sg = new SendGrid(pApiKey);
+		SendGrid sg = new SendGrid(this.apiKey);
 		Request request = new Request();
 		request.method = Method.GET;
 		request.endpoint = "templates";
@@ -75,14 +82,14 @@ public class TemplateService {
 		return listTemplate;
 	}
 
-	public void createTemplate(String pApiKey, Template template) throws IOException {
-		SendGrid sg = new SendGrid(pApiKey);
+	public void createTemplate() throws IOException {
+		SendGrid sg = new SendGrid(this.apiKey);
 		Request request = new Request();
 		request.method = Method.POST;
 		request.endpoint = "templates";
 
 		Template templateRequest = new Template();
-		templateRequest.setName(template.getName());
+		templateRequest.setName(this.template.getName());
 
 		Gson gson = new GsonBuilder().create();
 		String templateAsJson = gson.toJson(templateRequest);

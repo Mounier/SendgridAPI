@@ -5,6 +5,8 @@ package fr.sendgrid.api2.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +16,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.sendgrid.Content;
+import com.sendgrid.Email;
+import com.sendgrid.Mail;
 import com.sendgrid.Method;
 import com.sendgrid.Request;
 import com.sendgrid.Response;
@@ -26,15 +31,47 @@ import fr.sendgrid.api2.domain.RecipientFromSendgrid;
 public class RecipientService {
 	
 	protected CsvFile csvFile;
+	protected String apiKey;
 	
 	public RecipientService() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public RecipientService(File pFile) throws IOException {
+	public RecipientService(String pApiKey, File pFile) throws IOException {
 		this.csvFile = new CsvFile(pFile);
+		this.apiKey = pApiKey;
 	}
+	
+	public void sendTo(List<RecipientFromCsvFile> pRecipientList, Email pFrom, String pSubject, Content pContent)
+			throws IOException {
+
+		SendGrid sg = new SendGrid(this.apiKey);
+		Request request = new Request();
+		request.method = Method.POST;
+		request.endpoint = "mail/send";
+		Email from = pFrom;
+		String subject = pSubject;
+		Content content = pContent;
+		Email[] to = new Email[pRecipientList.size()];
+
+		try {
+			for (int i = 0; i < pRecipientList.size(); i++) {
+				to[i] = new Email(pRecipientList.get(i).getEmail());
+				Mail mail = new Mail(from, subject, to[i], content);
+				request.body = mail.build();
+				Response responseMailSent = sg.api(request);
+				System.out.println(responseMailSent.statusCode);
+				System.out.println(responseMailSent.body);
+				System.out.println(responseMailSent.headers);
+				System.out.println("Mail sent to " + pRecipientList.get(i));
+			}
+		} catch (IOException ex) {
+			throw ex;
+		}
+
+	}
+
 	
 	public List<RecipientFromCsvFile> RetrieveAllRecipientsFromCsvFile() {
 		
@@ -68,8 +105,9 @@ public class RecipientService {
 		return contact;
 	}
 	
-	public List<RecipientFromSendgrid> retrieveAllRecipientsFromSendgrid(String pApiKey) throws JSONException {
-		SendGrid sg = new SendGrid(pApiKey);
+	public List<RecipientFromSendgrid> retrieveAllRecipientsFromSendgrid() throws JSONException {
+		
+		SendGrid sg = new SendGrid(this.apiKey);
 		Request request = new Request();
 		request.method = Method.GET;
 		request.endpoint = "contactdb/recipients";
@@ -104,6 +142,109 @@ public class RecipientService {
 		}
 
 		return listRecipient;
+	}
+	
+	public void FindAllBlock() throws IOException {
+		try {
+			SendGrid sg = new SendGrid(this.apiKey);
+		    Request request = new Request();
+		    request.method = Method.GET;
+		    request.endpoint = "suppression/blocks";
+		    Map<String,String> queryParams = new HashMap<String, String>();
+		    Calendar now = Calendar.getInstance();
+			long nowInSeconde = now.getTimeInMillis()/1000l;	// on divise par mille car time.getTIme() est en seconde or on veut des milli secondes
+			long beforeOneMonthInSeconde = (now.getTimeInMillis()/1000l) - 2588339;		// on soustrait la valeur du temps now par 2588339 qui correspond environ à 1 mois en millisecondes pour nous ramener 1 mois avant
+			queryParams.put("start_time", String.valueOf(beforeOneMonthInSeconde));
+			queryParams.put("end_time", String.valueOf(nowInSeconde));
+//		    queryParams.put("offset", "0");		// 0 pour le début de la liste
+//		    queryParams.put("limit", "300");	// 300 pour indiquer l'indice de la position ou on veut s'arreter
+		    request.queryParams = queryParams;
+		    Response response = sg.api(request);
+		    System.out.println(response.statusCode);
+		    System.out.println(response.body);
+		    System.out.println(response.headers);
+		  } catch (IOException ex) {
+		    throw ex;
+		  }
+	}
+	
+	public void findAllBounce() throws IOException {
+		try {
+			SendGrid sg = new SendGrid(this.apiKey);
+			Request request = new Request();
+			request.method = Method.GET;
+			request.endpoint = "suppression/bounces";
+			Map<String, String> queryParams = new HashMap<String, String>();
+			Calendar now = Calendar.getInstance();
+			long nowInSeconde = now.getTimeInMillis()/1000l;	// on divise par mille car time.getTIme() est en seconde or on veut des milli secondes
+			long oneMonthAgoInSeconde = (now.getTimeInMillis()/1000l) - 2588339; 	// on soustrait la valeur du temps now par 2588339 qui correspond environ à 1 mois en millisecondes pour nous ramener 1 mois avant
+			queryParams.put("start_time", String.valueOf(oneMonthAgoInSeconde));
+			queryParams.put("end_time", String.valueOf(nowInSeconde));
+			request.queryParams = queryParams;
+			Response responseSpam = sg.api(request);
+			System.out.println(responseSpam.statusCode);
+			System.out.println(responseSpam.body);
+			System.out.println(responseSpam.headers);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+	}
+	
+	public void findAllInvalid() throws IOException {
+		try {
+			SendGrid sg = new SendGrid(this.apiKey);
+			Request request = new Request();
+			request.method = Method.GET;
+			request.endpoint = "suppression/invalid_emails";
+			Map<String, String> queryParams = new HashMap<String, String>();
+			Calendar now = Calendar.getInstance();
+			long nowInSeconde = now.getTimeInMillis() / 1000l;
+			/*
+			 * on divise par mille car time.getTIme() est en seconde or on veut
+			 * des milli secondes
+			 */
+			long beforeOneMonthInSeconde = (now.getTimeInMillis() / 1000l) - 2588339;
+			/*
+			 * on soustrait la valeur du temps now par 2588339 qui correspond
+			 * environ à 1 mois en millisecondes pour nous ramener 1 mois avant
+			 */
+			queryParams.put("start_time", String.valueOf(beforeOneMonthInSeconde));
+			// queryParams.put("limit", "300"); // 300 pour indiquer l'indice de la position ou on veut s'arreter
+			queryParams.put("end_time", String.valueOf(nowInSeconde));
+			// queryParams.put("offset", "0"); // 0 pour le début de la liste
+			request.queryParams = queryParams;
+			Response responseInvalid = sg.api(request);
+			System.out.println(responseInvalid.statusCode);
+			System.out.println(responseInvalid.body);
+			System.out.println(responseInvalid.headers);
+		} catch (IOException ex) {
+			throw ex;
+		}
+	}
+	
+	public void findAllSpam() throws IOException {
+		 try {
+			 SendGrid sg = new SendGrid(this.apiKey);
+			 Request request = new Request();
+			 request.method = Method.GET;
+			 request.endpoint = "suppression/spam_reports";
+			 Map<String,String> queryParams = new HashMap<String, String>();
+			 Calendar now = Calendar.getInstance();
+			 long nowInSeconde = now.getTimeInMillis()/1000l;	// on divise par mille car time.getTIme() est en seconde or on veut des milli secondes
+			 long oneMonthAgoInSeconde = (now.getTimeInMillis()/1000l) - 2588339;		// on soustrait la valeur du temps now par 2588339 qui correspond environ à 1 mois en millisecondes pour nous ramener 1 mois avant
+			 queryParams.put("start_time", String.valueOf(oneMonthAgoInSeconde));
+			 //queryParams.put("limit", "300"); // 300 pour indiquer l'indice de la position ou on veut s'arreter
+			 queryParams.put("end_time", String.valueOf(nowInSeconde));
+			 //queryParams.put("offset", "0");	// 0 pour le début de la liste
+			 request.queryParams = queryParams;
+			 Response responseSpam = sg.api(request);
+			 System.out.println(responseSpam.statusCode);
+			 System.out.println(responseSpam.body);
+			 System.out.println(responseSpam.headers);
+		 } catch (IOException ex) {
+			 throw ex;
+		 }
 	}
 	
 }

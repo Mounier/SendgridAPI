@@ -1,14 +1,24 @@
 package fr.sendgrid.api2.domain;
 
+/*		
+	POUR UTILISER (dans le main) :
+ 
+List<RecipientFromSendgrid> recipientList = new ArrayList<RecipientFromSendgrid>();
+RecipientService recipientServiceFromSendgrid = new RecipientService();
+recipientList = recipientService.retrieveAllRecipientsFromSendgrid(apiKey);
+System.out.println("liste des recipients : \n" + recipientList); 
+
+*/
+
 public class RecipientFromSendgrid {
-	String createdAt;
-	String email;
-	String firstName;
-	String id;
-	String lastClicked;
-	String lastEmailed;
-	String lastOpened;
-	String updatedAt;
+	protected String createdAt;
+	protected String email;
+	protected String firstName;
+	protected String id;
+	protected String lastClicked;
+	protected String lastEmailed;
+	protected String lastOpened;
+	protected String updatedAt;
 	
 	public RecipientFromSendgrid() {
 		super();

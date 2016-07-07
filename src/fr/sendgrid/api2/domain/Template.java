@@ -2,6 +2,11 @@ package fr.sendgrid.api2.domain;
 
 import java.util.Arrays;
 
+// pour créer un template (dans le main) :
+// String nomTemplate = "test template 2";
+// Template template = new Template(nomTemplate);
+// templateService.createTemplate(apiKey, template); 
+
 public class Template {
 
 	protected String name;
