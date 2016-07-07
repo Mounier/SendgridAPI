@@ -8,10 +8,12 @@ import fr.sendgrid.api2.domain.RecipientFromCsvFile;
 import fr.sendgrid.api2.domain.Template;
 import fr.sendgrid.api2.service.RecipientService;
 import fr.sendgrid.api2.service.TemplateService;
+import fr.sendgrid.api2.window.Fenetre;
 
 public class Main {
 
 	public static void main(String[] args) throws Exception {
+		Fenetre maFenetre = new Fenetre();
 		
 //		Récupération du fichier csv
 		String apiKey = "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";	//		Clé API qui permet de s'authentifier
