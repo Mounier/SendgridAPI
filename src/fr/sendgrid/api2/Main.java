@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import fr.sendgrid.api2.DAO.CsvFileHelperDao;
+import fr.sendgrid.api2.DAO.TxtFile;
 import fr.sendgrid.api2.domain.RecipientFromCsvFile;
 import fr.sendgrid.api2.domain.Template;
 import fr.sendgrid.api2.service.RecipientService;
@@ -95,11 +96,16 @@ public class Main {
 
 		TemplateService templateService = new TemplateService(apiKey);
 		List<Template> listTemplate = new ArrayList<Template>();
-
+		
 		listTemplate = templateService.retrieveAllTemplates();
 		System.out.println("\nliste des templates existants : \n" + listTemplate);
-
 		
+//		On charge le contenu du fichier txt(le code html) dans un string
+		String htmlContent=null;
+		TxtFile txtFile = new TxtFile("C:\\Users\\amounier\\templateExample.txt");
+		htmlContent = txtFile.loadFile();
+//		System.out.println(htmlContent);
+		templateService.createNewTransactionalTemplateVersion("maVersion", htmlContent, "le plain content", "7dc5b076-7d1f-4c02-b389-444119841a1f","mon sujet");
 	}
 
 }

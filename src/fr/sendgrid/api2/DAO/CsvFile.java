@@ -1,4 +1,4 @@
-package fr.sendgrid.api2.domain;
+package fr.sendgrid.api2.DAO;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,8 +7,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import fr.sendgrid.api2.DAO.CsvFileHelperDao;
 
 public class CsvFile {
 	public final static char SEPARATOR = ';';

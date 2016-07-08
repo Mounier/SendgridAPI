@@ -62,6 +62,8 @@ public class FenetreTemplate extends JFrame{
 	    Font police = new Font("Arial", Font.BOLD, 14);
 	    
 	    JPanel top = new JPanel();
+	    JPanel top2 = new JPanel();
+	    JPanel top3 = new JPanel();
 	    
 	    jtf.setPreferredSize(new Dimension(150, 30));
 	    jtf2.setPreferredSize(new Dimension(150, 30));
@@ -72,8 +74,8 @@ public class FenetreTemplate extends JFrame{
 	    top.add(labelNameVersion);
 	    top.add(labelHtmlContent);
 	    top.add(labelPlainContent);
-		top.add(labelTemplateId);
-		top.add(labelMailSubject);
+		top.add(labelTemplateId).setLocation(200, 200);
+		top.add(labelMailSubject).setLocation(199, -200);;
 		
 	    top.add(jtf);
 	    top.add(jtf2);
