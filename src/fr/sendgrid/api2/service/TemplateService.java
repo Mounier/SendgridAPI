@@ -43,7 +43,7 @@ public class TemplateService {
 			    Request request = new Request();
 			    request.method = Method.POST;
 			    request.endpoint = "templates/{template_id}/versions";
-			    request.body = "{\"name\":\" "+ versionName +" \",\"html_content\":\" "+ htmlContent +" \",\"plain_content\":\" "+ plainContent +" \",\"active\":1,\"template_id\":\" "+ templateId +" \",\"subject\":\" "+ subject +" \"}";
+			    request.body = "{\"name\":\" "+ versionName +" \",\"html_content\":\" "+ /*htmlContent*/null +" \",\"plain_content\":\" "+ null/*plainContent*/ +" \",\"active\":1,\"template_id\":\" "+ templateId +" \",\"subject\":\" "+ subject +" \"}";
 			    Response response = sg.api(request);
 			    System.out.println(response.statusCode);
 			    System.out.println(response.body);

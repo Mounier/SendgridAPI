@@ -106,6 +106,8 @@ public class Main {
 		htmlContent = txtFile.loadFile();
 //		System.out.println(htmlContent);
 		templateService.createNewTransactionalTemplateVersion("maVersion", htmlContent, "le plain content", "7dc5b076-7d1f-4c02-b389-444119841a1f","mon sujet");
+		
+		
 	}
 
 }
