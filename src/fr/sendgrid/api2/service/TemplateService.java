@@ -1,8 +1,12 @@
 package fr.sendgrid.api2.service;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -14,6 +18,7 @@ import com.sendgrid.Request;
 import com.sendgrid.Response;
 import com.sendgrid.SendGrid;
 import fr.sendgrid.api2.domain.Template;
+import fr.sendgrid.api2.domain.TemplateBody;
 
 public class TemplateService {
 
@@ -35,14 +40,37 @@ public class TemplateService {
 		this.template = pTemplate;
 		this.apiKey = pApiKey;
 	}
-
-	public void createNewTransactionalTemplateVersion (String versionName, String htmlContent, String plainContent, String templateId, String subject) throws IOException {
+	
+	public void createNewTransactionalTemplateVersion (String versionName, File htmlContent, File plainContent, String templateId, String subject) throws IOException {
 		
 		 try {
 			    SendGrid sg = new SendGrid(this.apiKey);
 			    Request request = new Request();
 			    request.method = Method.POST;
 			    request.endpoint = "templates/{template_id}/versions";
+			    
+			    /**************** test **************/
+			    
+			    GsonBuilder builder = new GsonBuilder();
+			    Gson gson = builder.create();
+			    String name = versionName;
+			    File html = htmlContent;
+			    File content = plainContent;
+			    Integer active = 1;
+			    String id = templateId;
+			    String objet = subject;
+			    
+			    String htmlString= FileUtils.readFileToString(html, "UTF-8");
+			    String contentString = FileUtils.readFileToString(content, "UTF-8");
+			    
+			    TemplateBody templateBody = new TemplateBody(name, htmlString, contentString, active, id, objet);
+			    String json = gson.toJson(templateBody);
+			    //			    final TemplateBody templateBody = new TemplateBody("nomTest", "<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Hello World</title></head><body>Ce texte est affiché en HTML<span id=\"texteJQ\"></span><script src=\"jquery.js\"></script><script src=\"jq-hello-world.js\"></script></body></html>", "<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Hello World</title></head><body>Ce texte est affiché en HTML<span id=\"texteJQ\"></span><script src=\"jquery.js\"></script><script src=\"jq-hello-world.js\"></script></body></html>", 1, "7dc5b076-7d1f-4c02-b389-444119841a1f", "un objet");
+			    
+			    System.out.println(json);
+			    
+			    /**************** test **************/
+			    
 			    request.body = "{\"name\":\" "+ versionName +" \",\"html_content\":\" "+ htmlContent +" \",\"plain_content\":\" "+ plainContent +" \",\"active\":1,\"template_id\":\" "+ templateId +" \",\"subject\":\" "+ subject +" \"}";
 			    Response response = sg.api(request);
 			    System.out.println(response.statusCode);
