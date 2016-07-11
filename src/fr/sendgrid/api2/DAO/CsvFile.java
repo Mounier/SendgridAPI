@@ -16,6 +16,7 @@ public class CsvFile {
 	protected String[] titles;
 	protected List<Map<String, String>> mappedData;
 	
+	
 	public CsvFile() {
 		super();
 		// TODO Auto-generated constructor stub
