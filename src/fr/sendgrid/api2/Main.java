@@ -101,11 +101,14 @@ public class Main {
 		System.out.println("\nliste des templates existants : \n" + listTemplate);
 		
 //		On charge le contenu du fichier txt(le code html) dans un string
-		String htmlContent=null;
-		TxtFile txtFile = new TxtFile("C:\\Users\\amounier\\templateExample.txt");
-		htmlContent = txtFile.loadFile();
+//		String htmlContent=null;
+//		String plainContent=null;
+		File txtFileHtmlContent = new File("C:\\Users\\amounier\\htmlExample.txt");
+		File txtFilePlainContent = new File("C:\\Users\\amounier\\plainContentExample.txt");
+//		htmlContent = txtFile.loadFile();
+//		plainContent = txtFile2.loadFile();
 //		System.out.println(htmlContent);
-		templateService.createNewTransactionalTemplateVersion("maVersion", htmlContent, "le plain content", "7dc5b076-7d1f-4c02-b389-444119841a1f","mon sujet");
+		templateService.createNewTransactionalTemplateVersion("maVersion", txtFileHtmlContent, txtFilePlainContent, 1,"7dc5b076-7d1f-4c02-b389-444119841a1f","mon sujet");
 		
 		
 	}

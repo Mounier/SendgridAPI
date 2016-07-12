@@ -17,6 +17,8 @@ import com.sendgrid.Method;
 import com.sendgrid.Request;
 import com.sendgrid.Response;
 import com.sendgrid.SendGrid;
+
+import fr.sendgrid.api2.DAO.TxtFile;
 import fr.sendgrid.api2.domain.Template;
 import fr.sendgrid.api2.domain.TemplateBody;
 
@@ -41,7 +43,7 @@ public class TemplateService {
 		this.apiKey = pApiKey;
 	}
 	
-	public void createNewTransactionalTemplateVersion (String versionName, File htmlContent, File plainContent, String templateId, String subject) throws IOException {
+	public void createNewTransactionalTemplateVersion (String versionName, File htmlContent, File plainContent, int active, String templateId, String subject) throws IOException {
 		
 		 try {
 			    SendGrid sg = new SendGrid(this.apiKey);
@@ -53,25 +55,18 @@ public class TemplateService {
 			    
 			    GsonBuilder builder = new GsonBuilder();
 			    Gson gson = builder.create();
-			    String name = versionName;
-			    File html = htmlContent;
-			    File content = plainContent;
-			    Integer active = 1;
-			    String id = templateId;
-			    String objet = subject;
+			    String htmlString= FileUtils.readFileToString(htmlContent, "UTF-8");
+			    String contentString = FileUtils.readFileToString(plainContent, "UTF-8");
 			    
-			    String htmlString= FileUtils.readFileToString(html, "UTF-8");
-			    String contentString = FileUtils.readFileToString(content, "UTF-8");
-			    
-			    TemplateBody templateBody = new TemplateBody(name, htmlString, contentString, active, id, objet);
+			    TemplateBody templateBody = new TemplateBody(versionName, htmlString, contentString, active, templateId, subject);
 			    String json = gson.toJson(templateBody);
-			    //			    final TemplateBody templateBody = new TemplateBody("nomTest", "<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Hello World</title></head><body>Ce texte est affiché en HTML<span id=\"texteJQ\"></span><script src=\"jquery.js\"></script><script src=\"jq-hello-world.js\"></script></body></html>", "<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Hello World</title></head><body>Ce texte est affiché en HTML<span id=\"texteJQ\"></span><script src=\"jquery.js\"></script><script src=\"jq-hello-world.js\"></script></body></html>", 1, "7dc5b076-7d1f-4c02-b389-444119841a1f", "un objet");
+			    //final TemplateBody templateBody = new TemplateBody("nomTest", "<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Hello World</title></head><body>Ce texte est affiché en HTML<span id=\"texteJQ\"></span><script src=\"jquery.js\"></script><script src=\"jq-hello-world.js\"></script></body></html>", "<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Hello World</title></head><body>Ce texte est affiché en HTML<span id=\"texteJQ\"></span><script src=\"jquery.js\"></script><script src=\"jq-hello-world.js\"></script></body></html>", 1, "7dc5b076-7d1f-4c02-b389-444119841a1f", "un objet");
 			    
+			    System.out.println("\ncreation du template\n");
 			    System.out.println(json);
-			    
 			    /**************** test **************/
 			    
-			    request.body = "{\"name\":\" "+ versionName +" \",\"html_content\":\" "+ htmlContent +" \",\"plain_content\":\" "+ plainContent +" \",\"active\":1,\"template_id\":\" "+ templateId +" \",\"subject\":\" "+ subject +" \"}";
+			    request.body = json;
 			    Response response = sg.api(request);
 			    System.out.println(response.statusCode);
 			    System.out.println(response.body);
