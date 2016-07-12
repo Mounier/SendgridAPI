@@ -8,5 +8,7 @@
 	<classpathentry kind="lib" path="C:/Users/amounier/Downloads/java-json.jar"/>
 	<classpathentry kind="lib" path="C:/Users/amounier/Downloads/sendgrid-java-3.0.0-jar.jar"/>
 	<classpathentry kind="lib" path="C:/Users/amounier/Downloads/smtpapi-java.jar"/>
+	<classpathentry kind="lib" path="C:/Users/amounier/Downloads/commons-io-2.5-bin/commons-io-2.5/commons-io-2.5-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/amounier/Downloads/commons-io-2.5-bin/commons-io-2.5/commons-io-2.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
