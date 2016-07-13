@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.json.JSONException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -55,8 +56,14 @@ public class TemplateService {
 			    
 			    GsonBuilder builder = new GsonBuilder();
 			    Gson gson = builder.create();
-			    String htmlString= FileUtils.readFileToString(htmlContent, "UTF-8");
+			    String htmlString = FileUtils.readFileToString(htmlContent, "UTF-8");
+			    System.out.println("htmlString : \n\t"+htmlString);
+			    htmlString = StringEscapeUtils.escapeHtml4(htmlString);
+			    htmlString = "";
+			    System.out.println("htmlString escaped : \n\t"+htmlString);
+			    
 			    String contentString = FileUtils.readFileToString(plainContent, "UTF-8");
+			    contentString = "coucou";
 			    
 			    TemplateBody templateBody = new TemplateBody(versionName, htmlString, contentString, active, templateId, subject);
 			    String json = gson.toJson(templateBody);
@@ -64,8 +71,8 @@ public class TemplateService {
 			    
 			    System.out.println("\ncreation du template\n");
 			    System.out.println(json);
-			    /**************** test **************/
-			    
+//			    /**************** test **************/
+//			    
 			    request.body = json;
 			    Response response = sg.api(request);
 			    System.out.println(response.statusCode);
