@@ -14,7 +14,7 @@ import fr.sendgrid.api2.window.FenetreTemplate;
 public class Main {
 
 	public static void main(String[] args) throws Exception {
-		FenetreTemplate maFenetre = new FenetreTemplate();
+//		FenetreTemplate maFenetre = new FenetreTemplate();
 		
 //		Récupération du fichier csv
 		String apiKey = "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";	//		Clé API qui permet de s'authentifier
@@ -96,10 +96,9 @@ public class Main {
 
 		TemplateService templateService = new TemplateService(apiKey);
 		List<Template> listTemplate = new ArrayList<Template>();
-		
 		listTemplate = templateService.retrieveAllTemplates();
 		System.out.println("\nliste des templates existants : \n" + listTemplate);
-		
+
 //		On charge le contenu du fichier txt(le code html) dans un string
 //		String htmlContent=null;
 //		String plainContent=null;
@@ -108,9 +107,10 @@ public class Main {
 //		htmlContent = txtFile.loadFile();
 //		plainContent = txtFile2.loadFile();
 //		System.out.println(htmlContent);
-		templateService.createNewTransactionalTemplateVersion("maVersion", txtFileHtmlContent, txtFilePlainContent, 1,"7dc5b076-7d1f-4c02-b389-444119841a1f","mon sujet");
-		
-		
+
+//		pour créer une nouvelle version, on peut faire la commande ci dessous. Attention, essayer de recréer une version avec le meme nom par exemple et on obtiendra une BAD REQUEST
+//		templateService.createNewTransactionalTemplateVersion("maVersion", txtFileHtmlContent, txtFilePlainContent, 1,"7dc5b076-7d1f-4c02-b389-444119841a1f","mon sujet");
+
 	}
 
 }

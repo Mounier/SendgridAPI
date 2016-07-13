@@ -11,7 +11,7 @@ public class Template {
 
 	protected String name;
 	protected String id;
-	protected String[] versions;
+	protected Version[] versions; //creer la classe version en mettant dedans tous els nouveaux attributs
 
 	public Template() {
 		super();
@@ -22,7 +22,7 @@ public class Template {
 		this.name = pName;
 	}
 
-	public Template(String name, String id, String[] versions) {
+	public Template(String name, String id, Version[] versions) {
 		super();
 		this.name = name;
 		this.id = id;
@@ -37,11 +37,11 @@ public class Template {
 		this.id = id;
 	}
 
-	public String[] getVersions() {
+	public Version[] getVersions() {
 		return versions;
 	}
 
-	public void setVersions(String[] versions) {
+	public void setVersions(Version[] versions) {
 		this.versions = versions;
 	}
 
