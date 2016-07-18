@@ -32,6 +32,13 @@ public class SendToV3Personalizations {
 		this.substitutions = substitutions;
 		this.subject = subject;
 	}
+	
+	
+
+	public SendToV3Personalizations(SendToV3PersonalizationTo[] to) {
+		super();
+		this.to = to;
+	}
 
 	@Override
 	public String toString() {

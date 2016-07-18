@@ -61,6 +61,17 @@ public class SendToV3Body {
 		this.categories = categories;
 		this.send_at = send_at;
 	}
+	
+	
+
+	public SendToV3Body(SendToV3From from, SendToV3Personalizations personalizations, String subject,
+			String template_id) {
+		super();
+		this.from = from;
+		this.personalizations = personalizations;
+		this.subject = subject;
+		this.template_id = template_id;
+	}
 
 	@Override
 	public String toString() {
