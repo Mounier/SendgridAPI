@@ -124,11 +124,9 @@ public class TemplateService {
 			// Il ne reste plus qu'à parcourir le tableau json et récupérer
 			// chaque template
 			for (int i = 0; i < templateJsonArray.size(); i++) {
-				System.out.println("coucou du retrievealltemplates"+i);
 				Template temp = gson.fromJson(templateJsonArray.get(i), Template.class);
 				// Une fois le template récupéré du json, on le stock dans notre
 				// liste.
-				System.out.println("coucou du retrievealltemplates"+i);
 				listTemplate.add(temp);
 			}
 
@@ -136,7 +134,6 @@ public class TemplateService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("coucou du retrievealltemplates");
 		return listTemplate;
 	}
 

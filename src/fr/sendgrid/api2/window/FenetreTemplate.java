@@ -20,7 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import jdk.nashorn.internal.ir.Labels;
+//import jdk.nashorn.internal.ir.Labels;
  
 public class FenetreTemplate extends JFrame{
 	
