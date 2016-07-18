@@ -20,12 +20,12 @@ import com.sendgrid.Response;
 import com.sendgrid.SendGrid;
 
 import fr.sendgrid.api2.DAO.TxtFile;
-import fr.sendgrid.api2.domain.Template;
 import fr.sendgrid.api2.domain.TemplateBody;
+import fr.sendgrid.api2.domain.TemplateVersionBody;
 
 public class TemplateService {
 
-	protected Template template = new Template();
+	protected TemplateBody template = new TemplateBody();
 	protected String apiKey;
 
 	public TemplateService() {
@@ -38,7 +38,7 @@ public class TemplateService {
 		this.apiKey = pApiKey;
 	}
 
-	public TemplateService(String pApiKey, Template pTemplate) {
+	public TemplateService(String pApiKey, TemplateBody pTemplate) {
 		super();
 		this.template = pTemplate;
 		this.apiKey = pApiKey;
@@ -65,7 +65,7 @@ public class TemplateService {
 			String contentString = FileUtils.readFileToString(plainContent, "UTF-8");
 			System.out.println("contentString : " + contentString);
 
-			TemplateBody templateBody = new TemplateBody(versionName, htmlString, contentString, active, templateId,
+			TemplateVersionBody templateBody = new TemplateVersionBody(versionName, htmlString, contentString, active, templateId,
 					subject);
 
 			String json = gson.toJson(templateBody);
@@ -87,7 +87,7 @@ public class TemplateService {
 		}
 	}
 
-	public List<Template> retrieveAllTemplates() throws JSONException {
+	public List<TemplateBody> retrieveAllTemplates() throws JSONException {
 
 		SendGrid sg = new SendGrid(this.apiKey);
 		Request request = new Request();
@@ -95,7 +95,7 @@ public class TemplateService {
 		request.endpoint = "templates";
 
 		Response response;
-		List<Template> listTemplate = new ArrayList<Template>();
+		List<TemplateBody> listTemplate = new ArrayList<TemplateBody>();
 
 		try {
 			
@@ -123,7 +123,7 @@ public class TemplateService {
 			// Il ne reste plus qu'à parcourir le tableau json et récupérer
 			// chaque template
 			for (int i = 0; i < templateJsonArray.size(); i++) {
-				Template temp = gson.fromJson(templateJsonArray.get(i), Template.class);
+				TemplateBody temp = gson.fromJson(templateJsonArray.get(i), TemplateBody.class);
 				// Une fois le template récupéré du json, on le stock dans notre
 				// liste.
 				listTemplate.add(temp);
@@ -142,7 +142,7 @@ public class TemplateService {
 		request.method = Method.POST;
 		request.endpoint = "templates";
 
-		Template templateRequest = new Template();
+		TemplateBody templateRequest = new TemplateBody();
 		templateRequest.setName(this.template.getName());
 
 		Gson gson = new GsonBuilder().create();

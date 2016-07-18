@@ -1,23 +1,50 @@
 package fr.sendgrid.api2.domain;
 
+import java.util.Arrays;
+
+import fr.sendgrid.api2.domain.bodys.TemplateVersion;
+
+// pour créer un template (dans le main) :
+// String nomTemplate = "test template 2";
+// Template template = new Template(nomTemplate);
+// templateService.createTemplate(apiKey, template); 
+
 public class TemplateBody {
-	
-	private String name;
-	private String html_content;
-	private String plain_content;
-	Integer active;
-	private String templateId;
-	private String subject;
-	
-	public TemplateBody(String name, String html_content, String plain_content, Integer active, String templateId,
-			String subject) {
+
+	protected String name;
+	protected String id;
+	protected TemplateVersion[] versions; //creer la classe version en mettant dedans tous els nouveaux attributs
+
+	public TemplateBody() {
+		super();
+	}
+
+	public TemplateBody(String pName) {
+		super();
+		this.name = pName;
+	}
+
+	public TemplateBody(String name, String id, TemplateVersion[] versions) {
 		super();
 		this.name = name;
-		this.html_content = html_content;
-		this.plain_content = plain_content;
-		this.active = active;
-		this.templateId = templateId;
-		this.subject = subject;
+		this.id = id;
+		this.versions = versions;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public TemplateVersion[] getVersions() {
+		return versions;
+	}
+
+	public void setVersions(TemplateVersion[] versions) {
+		this.versions = versions;
 	}
 
 	public String getName() {
@@ -28,52 +55,10 @@ public class TemplateBody {
 		this.name = name;
 	}
 
-	public String getHtml_content() {
-		return html_content;
-	}
-
-	public void setHtml_content(String html_content) {
-		this.html_content = html_content;
-	}
-
-	public String getPlain_content() {
-		return plain_content;
-	}
-
-	public void setPlain_content(String plain_content) {
-		this.plain_content = plain_content;
-	}
-
-	public Integer getActive() {
-		return active;
-	}
-
-	public void setActive(Integer active) {
-		this.active = active;
-	}
-
-	public String getTemplateId() {
-		return templateId;
-	}
-
-	public void setTemplateId(String templateId) {
-		this.templateId = templateId;
-	}
-
-	public String getSubject() {
-		return subject;
-	}
-
-	public void setSubject(String subject) {
-		this.subject = subject;
-	}
-
 	@Override
 	public String toString() {
-		return "TemplateBody [name=" + name + ", html_content=" + html_content + ", plain_content=" + plain_content
-				+ ", active=" + active + ", templateId=" + templateId + ", subject=" + subject + "]";
+		return "[name=" + name + ", id=" + id + ", versions=" + Arrays.toString(versions) + "]";
 	}
-	
 	
 	
 }

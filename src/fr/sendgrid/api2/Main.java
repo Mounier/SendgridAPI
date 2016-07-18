@@ -6,7 +6,7 @@ import java.util.List;
 import fr.sendgrid.api2.DAO.CsvFileHelperDao;
 import fr.sendgrid.api2.DAO.TxtFile;
 import fr.sendgrid.api2.domain.RecipientFromCsvFile;
-import fr.sendgrid.api2.domain.Template;
+import fr.sendgrid.api2.domain.TemplateBody;
 import fr.sendgrid.api2.service.RecipientService;
 import fr.sendgrid.api2.service.TemplateService;
 import fr.sendgrid.api2.window.FenetreTemplate;
@@ -37,16 +37,18 @@ public class Main {
 		System.out.println(recipientsFromCsvList);
 
 		
-/*		
+		
 		System.out.println(
 				"\n\n***************************************************************************************************************************************************************************************");
 		System.out.println(
-				"******************************************************************************   Sending   ********************************************************************************************");
+				"******************************************************************************   Sending with sendV3  ********************************************************************************************");
 		System.out.println(
 				"***************************************************************************************************************************************************************************************");
 		
 		
-		Email from = new Email("amounier@isilis.fr"); 
+//		recipientService.sendToV3(from, personalization, subject, template_id);
+		
+/*		Email from = new Email("amounier@isilis.fr"); 
 		String subject ="NOUVEAU SUJET"; // /!\ SI ON MET LE CARACTERE '°' DANS LE subjec ALORS ON OBTIENT UNE EXCEPTION /!\ 
 		Content content = new Content("text/plain", "Ceci est un test");
 		recipientService.sendTo(recipientsFromCsvList, from, subject, content);
@@ -95,7 +97,7 @@ public class Main {
 				"***************************************************************************************************************************************************************************************");
 
 		TemplateService templateService = new TemplateService(apiKey);
-		List<Template> listTemplate = new ArrayList<Template>();
+		List<TemplateBody> listTemplate = new ArrayList<TemplateBody>();
 		listTemplate = templateService.retrieveAllTemplates();
 		System.out.println("\nliste des templates existants : \n" + listTemplate);
 

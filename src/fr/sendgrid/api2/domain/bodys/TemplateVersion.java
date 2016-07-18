@@ -1,4 +1,4 @@
-package fr.sendgrid.api2.domain;
+package fr.sendgrid.api2.domain.bodys;
 
 public class TemplateVersion {
 	private String id;
