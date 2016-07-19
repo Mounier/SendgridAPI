@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.http.client.HttpResponseException;
 import org.json.JSONException;
@@ -18,7 +17,6 @@ import com.sendgrid.Method;
 import com.sendgrid.Request;
 import com.sendgrid.Response;
 import com.sendgrid.SendGrid;
-
 import fr.sendgrid.api2.DAO.TxtFile;
 import fr.sendgrid.api2.domain.TemplateBody;
 import fr.sendgrid.api2.domain.TemplateVersionBody;
