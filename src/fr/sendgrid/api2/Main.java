@@ -175,7 +175,7 @@ public class Main {
 	    to.setEmail("amounier@et.esiea.fr");
 	    personalization.addTo(to);
 	    to.setName("le receveur No.2");
-	    to.setEmail("dridri_du91@hotmail.fr");
+	    to.setEmail("adrien-mounier@hotmail.fr");
 	    personalization.addTo(to);
 	    personalization.setSubject("Hello World from the Personalized SendGrid Java Library");
 	    personalization.addHeader("X-Test", "test");
@@ -199,16 +199,16 @@ public class Main {
 	    mail.addAttachments(attachments);
 */	    
 	    Attachments attachments2 = new Attachments();
-//	    attachments2.setContent("BwdW");
+	    attachments2.setContent("BwdW");
 	    attachments2.setType("image/png");
-	    attachments2.setFilename("banner.png");	//foutre une image dans les sources pour tester.		
-	    attachments2.setDisposition("inline");
-	    attachments2.setContentId("Banner");
+	    attachments2.setFilename("C:\\Users\\amounier\\image.jpg");		
+//	    attachments2.setDisposition("inline");
+//	    attachments2.setContentId("Banner");
 	    mail.addAttachments(attachments2);
 	    
 	    
 //	    Definition du template à utiliser
-	    mail.setTemplateId("7dac05e4-388e-400e-8e96-3690422670f8");
+//	    mail.setTemplateId("7dac05e4-388e-400e-8e96-3690422670f8");
 	    
 	    
 		return mail;
