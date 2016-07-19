@@ -152,8 +152,8 @@ public class Main {
 //		System.out.println(htmlContent);
 
 //		pour créer une nouvelle version, on peut faire la commande ci dessous. Attention, essayer de recréer une version avec le meme nom par exemple et on obtiendra une BAD REQUEST
-//		templateService.createNewTransactionalTemplateVersion("maVersion", txtFileHtmlContent, txtFilePlainContent, 1,"7dc5b076-7d1f-4c02-b389-444119841a1f","mon sujet");
-
+//		templateService.createNewTransactionalTemplateVersion("Version d'isilis", txtFileHtmlContent, txtFilePlainContent, 1,"7dac05e4-388e-400e-8e96-3690422670f8","mon sujet");
+//		System.out.println("creation d'une nouvelle version d'un template");
 	}
 
 	private static Mail buildMail() throws IOException {
@@ -200,7 +200,7 @@ public class Main {
 */	    
 	    Attachments attachments2 = new Attachments();
 	    attachments2.setContent("BwdW");
-	    attachments2.setType("image/png");
+	    attachments2.setType("image/jpg");
 	    attachments2.setFilename("C:\\Users\\amounier\\image.jpg");		
 //	    attachments2.setDisposition("inline");
 //	    attachments2.setContentId("Banner");
@@ -208,7 +208,7 @@ public class Main {
 	    
 	    
 //	    Definition du template à utiliser
-//	    mail.setTemplateId("7dac05e4-388e-400e-8e96-3690422670f8");
+	    mail.setTemplateId("7dac05e4-388e-400e-8e96-3690422670f8");
 	    
 	    
 		return mail;
