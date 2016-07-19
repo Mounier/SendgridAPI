@@ -166,7 +166,7 @@ public class Main {
 	    mail.setFrom(fromEmail);
 	    
 //	    L'objet du mail
-	    mail.setSubject("Hello World from the SendGrid Java Library");
+	    mail.setSubject("Hello World from the SendGrid Java Library"); // /!\ SI ON MET LE CARACTERE '°' DANS L'OBJET ALORS ON OBTIENT UNE EXCEPTION /!\ 
 	    
 //	    Definition du/des contacts à qui envoyer le mail / Les adresses mail en copie etc
 	    Personalization personalization = new Personalization();
