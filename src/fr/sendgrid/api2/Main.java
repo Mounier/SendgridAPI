@@ -142,15 +142,9 @@ public class Main {
 		listTemplate = templateService.retrieveAllTemplates();
 		System.out.println("\nliste des templates existants : \n" + listTemplate);
 
-//		On charge le contenu du fichier txt(le code html) dans un string
-//		String htmlContent=null;
-//		String plainContent=null;
-		File txtFileHtmlContent = new File("C:\\Users\\amounier\\htmlExample.txt");
-		File txtFilePlainContent = new File("C:\\Users\\amounier\\plainContentExample.txt");
-//		htmlContent = txtFile.loadFile();
-//		plainContent = txtFile2.loadFile();
-//		System.out.println(htmlContent);
-
+//		On charge les fichiers texte
+//		File txtFileHtmlContent = new File("C:\\Users\\amounier\\htmlExample.txt");
+//		File txtFilePlainContent = new File("C:\\Users\\amounier\\plainContentExample.txt");
 //		pour créer une nouvelle version, on peut faire la commande ci dessous. Attention, essayer de recréer une version avec le meme nom par exemple et on obtiendra une BAD REQUEST
 //		templateService.createNewTransactionalTemplateVersion("Version d'isilis", txtFileHtmlContent, txtFilePlainContent, 1,"7dac05e4-388e-400e-8e96-3690422670f8","mon sujet");
 //		System.out.println("creation d'une nouvelle version d'un template");
