@@ -52,8 +52,8 @@ public class RecipientService {
 		this.apiKey = pApiKey;
 	}
 	
-	public void sendToV3(SendToV3From from, SendToV3Personalizations personalization, String subject, String template_id /*SendToV3Content content[]*/) throws IOException {
-		System.out.println("test");
+	public void sendToV3(SendToV3From from, SendToV3Personalizations personalization, /*String subject,*/ /* String template_id*/ SendToV3Content content[]) throws IOException {
+		System.out.println("test depuis sendToV3");
 			    SendGrid sg = new SendGrid(this.apiKey);
 			    Request request = new Request();
 			    request.method = Method.POST;
@@ -64,7 +64,7 @@ public class RecipientService {
 //			    request.body = "";
 			    GsonBuilder builder = new GsonBuilder();
 			    Gson gson = builder.create();
-			    SendToV3Body sendToV3Body = new SendToV3Body(from, personalization, subject, template_id);				
+			    SendToV3Body sendToV3Body = new SendToV3Body(from, personalization, /*subject,*/ content);				
 				String json = gson.toJson(sendToV3Body);
 				System.out.println("voici le json : " + json);
 				Response response = null;

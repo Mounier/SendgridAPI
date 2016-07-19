@@ -7,6 +7,7 @@ import fr.sendgrid.api2.DAO.CsvFileHelperDao;
 import fr.sendgrid.api2.DAO.TxtFile;
 import fr.sendgrid.api2.domain.RecipientFromCsvFile;
 import fr.sendgrid.api2.domain.TemplateBody;
+import fr.sendgrid.api2.domain.bodys.SendToV3Content;
 import fr.sendgrid.api2.domain.bodys.SendToV3From;
 import fr.sendgrid.api2.domain.bodys.SendToV3PersonalizationTo;
 import fr.sendgrid.api2.domain.bodys.SendToV3Personalizations;
@@ -50,14 +51,20 @@ public class Main {
 		
 		SendToV3PersonalizationTo[] to = new SendToV3PersonalizationTo[1];
 		System.out.println("test du main");
-		SendToV3PersonalizationTo to[0] = (SendToV3PersonalizationTo) new SendToV3PersonalizationTo("dridri_du91@hotmail.fr", "dridri");
+		to[0] = new SendToV3PersonalizationTo("amounier@et.esiea.fr", "dridri");
 		
-		SendToV3Personalizations personalization = new SendToV3Personalizations(to);
+		SendToV3Content[] content = new SendToV3Content[1];
+		content[0] = new SendToV3Content("text", "Hello");
+		
+		
+		SendToV3Personalizations personalization = new SendToV3Personalizations(to, "subject");
+		System.out.println(personalization);
 		SendToV3From from = new SendToV3From();
 		from.setEmail("amounier@islis.fr");
 		from.setName("isilis");
-		personalization.setTo(to);
-		recipientService.sendToV3(from, personalization, "subject", "7dac05e4-388e-400e-8e96-3690422670f8");
+//		personalization.setTo(to);
+//		personalization.setSubject("subject");
+		recipientService.sendToV3(from, personalization, content);	//meme format que la request body de l'api (qui fonctionne) https://sendgrid.com/docs/API_Reference/Web_API_v3/Mail/index.html
 		
 /*		Email from = new Email("amounier@isilis.fr"); 
 		String subject ="NOUVEAU SUJET"; // /!\ SI ON MET LE CARACTERE '°' DANS LE subjec ALORS ON OBTIENT UNE EXCEPTION /!\ 

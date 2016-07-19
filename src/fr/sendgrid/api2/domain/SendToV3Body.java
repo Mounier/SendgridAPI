@@ -73,6 +73,22 @@ public class SendToV3Body {
 		this.template_id = template_id;
 	}
 
+	public SendToV3Body(SendToV3From from, SendToV3Personalizations personalizations, String subject,
+			SendToV3Content[] content) {
+		super();
+		this.from = from;
+		this.personalizations = personalizations;
+		this.subject = subject;
+		this.content = content;
+	}
+	
+	public SendToV3Body(SendToV3From from, SendToV3Personalizations personalizations, SendToV3Content[] content) {
+		super();
+		this.from = from;
+		this.personalizations = personalizations;
+		this.content = content;
+	}
+
 	@Override
 	public String toString() {
 		return "SendToV3Body [custom_args=" + custom_args + ", from=" + from + ", attachments=" + attachments

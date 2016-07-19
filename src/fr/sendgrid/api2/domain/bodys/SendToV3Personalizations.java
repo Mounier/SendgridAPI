@@ -35,9 +35,10 @@ public class SendToV3Personalizations {
 	
 	
 
-	public SendToV3Personalizations(SendToV3PersonalizationTo[] to) {
+	public SendToV3Personalizations(SendToV3PersonalizationTo[] to, String subject) {
 		super();
 		this.to = to;
+		this.subject = subject;
 	}
 
 	@Override
