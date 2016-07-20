@@ -160,7 +160,7 @@ public class Main {
 	    mail.setFrom(fromEmail);
 	    
 //	    L'objet du mail
-	    mail.setSubject("Hello World from the SendGrid Java Library"); // /!\ SI ON MET LE CARACTERE '°' DANS L'OBJET ALORS ON OBTIENT UNE EXCEPTION /!\ 
+	    mail.setSubject("Normal subject"); // /!\ SI ON MET LE CARACTERE '°' DANS L'OBJET ALORS ON OBTIENT UNE EXCEPTION /!\ 
 	    
 //	    Definition du/des contacts à qui envoyer le mail / Les adresses mail en copie etc
 	    Personalization personalization = new Personalization();
@@ -171,11 +171,10 @@ public class Main {
 	    to.setName("le receveur No.2");
 	    to.setEmail("adrien-mounier@hotmail.fr");
 	    personalization.addTo(to);
-	    personalization.setSubject("Hello World from the Personalized SendGrid Java Library");
+	    personalization.setSubject("subject in personalization");
 	    personalization.addHeader("X-Test", "test");
 	    personalization.addHeader("X-Mock", "true");
 	    mail.addPersonalization(personalization);
-	    
 //	    Definition du contenu du mail
 	    Content content = new Content();
 	    content.setType("text/html");
@@ -187,7 +186,7 @@ public class Main {
 /*	    Attachments attachments = new Attachments();
 //	    se rendre sur ce site -> https://lehollandaisvolant.net/tout/tools/base64i/ afin d'encoder notre fichier en base 64 (Une partie du début du texte encodé obtenu est à supprimer)
 	    attachments.setContent("TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3RldHVyIGFkaXBpc2NpbmcgZWxpdC4gQ3JhcyBwdW12");
-	    attachments.setType("application/pdf");
+	    attachments.setType("pdf");
 	    attachments.setFilename("balance_001.pdf");
 	    attachments.setDisposition("attachment");
 	    attachments.setContentId("Balance Sheet");
@@ -204,7 +203,7 @@ public class Main {
 	    
 	    
 //	    Definition du template à utiliser
-	    mail.setTemplateId("7dac05e4-388e-400e-8e96-3690422670f8");
+//	    mail.setTemplateId("7dac05e4-388e-400e-8e96-3690422670f8");
 	    
 	    
 		return mail;
