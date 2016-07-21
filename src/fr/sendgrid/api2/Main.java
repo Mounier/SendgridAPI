@@ -180,7 +180,6 @@ public class Main {
 	    content.setType("text/html");
 	    content.setValue("<html><body>some text here</body></html>");
 	    mail.addContent(content);
-
 	    
 //	    Definition de la piece jointe
 /*	    Attachments attachments = new Attachments();
