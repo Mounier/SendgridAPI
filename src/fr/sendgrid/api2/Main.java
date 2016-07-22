@@ -72,22 +72,22 @@ public class Main {
 				"******************************************************************************   Sending   ********************************************************************************************");
 		System.out.println(
 				"***************************************************************************************************************************************************************************************");
-		SendGrid sg = new SendGrid(apiKey);
-		sg.addRequestHeader("X-Mock","true");
-		Request request = new Request();
-		Mail mail = buildMail();
-		
-		try {
-		      request.method = Method.POST;
-		      request.endpoint = "mail/send";
-		      request.body = mail.build();
-		      Response response = sg.api(request);
-		      System.out.println(response.statusCode);
-		      System.out.println(response.body);
-		      System.out.println(response.headers);
-		    } catch (IOException ex) {
-		      throw ex;
-		    }
+//		SendGrid sg = new SendGrid(apiKey);
+//		sg.addRequestHeader("X-Mock","true");
+//		Request request = new Request();
+//		Mail mail = buildMail();
+//		
+//		try {
+//		      request.method = Method.POST;
+//		      request.endpoint = "mail/send";
+//		      request.body = mail.build();
+//		      Response response = sg.api(request);
+//		      System.out.println(response.statusCode);
+//		      System.out.println(response.body);
+//		      System.out.println(response.headers);
+//		    } catch (IOException ex) {
+//		      throw ex;
+//		    }
 
 		
 //		String subject ="NOUVEAU SUJET"; // /!\ SI ON MET LE CARACTERE '°' DANS LE subjec ALORS ON OBTIENT UNE EXCEPTION /!\ 
@@ -148,6 +148,14 @@ public class Main {
 //		pour créer une nouvelle version, on peut faire la commande ci dessous. Attention, essayer de recréer une version avec le meme nom par exemple et on obtiendra une BAD REQUEST
 //		templateService.createNewTransactionalTemplateVersion("Version d'isilis", txtFileHtmlContent, txtFilePlainContent, 1,"7dac05e4-388e-400e-8e96-3690422670f8","mon sujet");
 //		System.out.println("creation d'une nouvelle version d'un template");
+		
+		System.out.println(
+				"\n\n***************************************************************************************************************************************************************************************");
+		System.out.println(
+				"******************************************************************************   TrackingSettings   *********************************************************************************************");
+		System.out.println(
+				"***************************************************************************************************************************************************************************************");
+		
 	}
 
 	private static Mail buildMail() throws IOException {
@@ -207,5 +215,4 @@ public class Main {
 	    
 		return mail;
 	}
-
 }
