@@ -7,8 +7,10 @@ import fr.sendgrid.api2.DAO.CsvFileHelperDao;
 import fr.sendgrid.api2.DAO.TxtFile;
 import fr.sendgrid.api2.domain.RecipientFromCsvFile;
 import fr.sendgrid.api2.domain.Template;
+import fr.sendgrid.api2.domain.Webhook;
 import fr.sendgrid.api2.service.RecipientService;
 import fr.sendgrid.api2.service.TemplateService;
+import fr.sendgrid.api2.service.WebhookService;
 import fr.sendgrid.api2.window.FenetreTemplate;
 import com.sendgrid.ASM;
 import com.sendgrid.Attachments;
@@ -155,7 +157,9 @@ public class Main {
 				"******************************************************************************   TrackingSettings   *********************************************************************************************");
 		System.out.println(
 				"***************************************************************************************************************************************************************************************");
-		
+		Webhook webhook = new Webhook();
+		WebhookService webhookService = new WebhookService(apiKey,webhook);
+		webhookService.retrieveWebhookSettings();
 	}
 
 	private static Mail buildMail() throws IOException {
