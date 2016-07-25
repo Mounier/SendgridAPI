@@ -159,7 +159,11 @@ public class Main {
 				"***************************************************************************************************************************************************************************************");
 		Webhook webhook = new Webhook();
 		WebhookService webhookService = new WebhookService(apiKey,webhook);
+		
 		webhookService.retrieveWebhookSettings();
+		webhookService.updateWebhookSettingsAllTrue();
+		webhookService.retrieveWebhookSettings();
+		
 	}
 
 	private static Mail buildMail() throws IOException {
