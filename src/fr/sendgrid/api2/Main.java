@@ -228,6 +228,7 @@ public class Main {
 	    personalization.addHeader("X-Test", "test");
 	    personalization.addHeader("X-Mock", "true");
 	    mail.addPersonalization(personalization);
+	    
 //	    Definition du contenu du mail
 	    Content content = new Content();
 	    content.setType("text/html");
