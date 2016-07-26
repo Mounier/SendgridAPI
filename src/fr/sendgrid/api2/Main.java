@@ -164,6 +164,23 @@ public class Main {
 //		webhookService.updateWebhookSettingsAllTrue();
 //		webhookService.retrieveWebhookSettings();
 		
+		  try {
+			    SendGrid sg = new SendGrid(apiKey);
+			    Request request = new Request();
+			    request.method = Method.GET;
+			    request.endpoint = "tracking_settings";
+//			    Map<String,String> queryParams = new HashMap<String, String>();
+//			    queryParams.put("limit", "1");
+//			    queryParams.put("offset", "1");
+//			    request.queryParams = queryParams;
+			    Response response = sg.api(request);
+			    System.out.println(response.statusCode);
+			    System.out.println(response.body);
+			    System.out.println(response.headers);
+			  } catch (IOException ex) {
+			    throw ex;
+			  }
+		
 //		 try {
 //			    SendGrid sg = new SendGrid(apiKey);
 //			    Request request = new Request();
