@@ -78,7 +78,7 @@ public class Main {
 		 MailService mailService = new MailService();
 		 Map<String, String> params = new HashMap<>();
 //		 substitutions.put("%url-perso%", "https://github.com/Mounier");
-//		 params.put(MailService.PARAM_SUBJECT, "TEST - NEW WAY TO SEND");
+//		 params.put(MailService.PARAM_SUBJECT, "TEST - NEW WAY TO SEND"); // /!\ SI ON MET LE CARACTERE '°' DANS LE subject ALORS ON OBTIENT UNE EXCEPTION /!\ 
 		 params.put(MailService.PARAM_TEMPLATE_ID, "7dac05e4-388e-400e-8e96-3690422670f8");
 		 params.put(MailService.PARAM_FROM_NAME, "Service Client");
 		 params.put(MailService.PARAM_FROM, "amounier@isilis.fr");
