@@ -51,8 +51,7 @@ public class Main {
 		String apiKey = "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";	//		Clé API qui permet de s'authentifier
 		final String FILE_NAME = "C:\\liste_contact.csv";
 		System.out.println("Retrieving the csv file...");
-		File file = CsvFileHelperDao.getRessource(FILE_NAME);
-		RecipientService recipientService = new RecipientService(apiKey,file);	//ce sera à partir de cet objet qu'on fera toute les opérations sur les contacts/recipients
+		File file = CsvFileHelperDao.getRessource(FILE_NAME);		RecipientService recipientService = new RecipientService(apiKey,file);	//ce sera à partir de cet objet qu'on fera toute les opérations sur les contacts/recipients
 	
 		System.out.println(
 				"\n\n        ***************************************************************************************************************************************************************************************");
