@@ -159,7 +159,34 @@ public class Main {
 //		webhookService.updateWebhookSettingsAllTrue();
 //		webhookService.retrieveWebhookSettings();
 		
-// 	Tous les GET TrackingSettings donnent une exception FORBIDEN
-		System.out.println("FORBIDEN FOR EVER");
+// 	Tous les GET TrackingSettings donnent une exception FORBIDEN EDIT : plus maintenant depuis l'intervention de greg. Mon postman etait apparrement "bugué" du coup impossible de me donner les permissions sur ma clé (à partir de postman car impossible avec l'api java)
+		
+		System.out.println("tracking click :");
+		 try {	
+			 SendGrid sg = new SendGrid(apiKey);
+			 Request request = new Request();
+			 request.method = Method.GET;
+			 request.endpoint = "tracking_settings/click";
+			 Response response = sg.api(request);
+			 System.out.println(response.statusCode);
+			 System.out.println(response.body);
+			 System.out.println(response.headers);
+		 } catch (IOException ex) {
+			    throw ex;
+		 }
+		 
+		 System.out.println("tracking open :");
+		 try {
+			 SendGrid sg = new SendGrid(apiKey);
+			 Request request = new Request();
+			 request.method = Method.GET;
+			 request.endpoint = "tracking_settings/open";
+			 Response response = sg.api(request);
+			 System.out.println(response.statusCode);
+			 System.out.println(response.body);
+			 System.out.println(response.headers);
+		 } catch (IOException ex) {
+			    throw ex;
+		 }
 	}
 }
