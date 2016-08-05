@@ -159,34 +159,57 @@ public class Main {
 //		webhookService.updateWebhookSettingsAllTrue();
 //		webhookService.retrieveWebhookSettings();
 		
-// 	Tous les GET TrackingSettings donnent une exception FORBIDEN EDIT : plus maintenant depuis l'intervention de greg. Mon postman etait apparrement "bugué" du coup impossible de me donner les permissions sur ma clé (à partir de postman car impossible avec l'api java)
+// 	Tous les GET TrackingSettings donnent une exception FORBIDEN EDIT : plus maintenant depuis l'intervention de greg. Mon postman etait apparemment "bugué" du coup impossible de me donner les permissions sur ma clé (à partir de postman car impossible avec l'api java)
 		
 		System.out.println("tracking click :");
-		 try {	
-			 SendGrid sg = new SendGrid(apiKey);
-			 Request request = new Request();
-			 request.method = Method.GET;
-			 request.endpoint = "tracking_settings/click";
-			 Response response = sg.api(request);
-			 System.out.println(response.statusCode);
-			 System.out.println(response.body);
-			 System.out.println(response.headers);
-		 } catch (IOException ex) {
-			    throw ex;
-		 }
+//		 try {	
+//			 SendGrid sg = new SendGrid(apiKey);
+//			 Request request = new Request();
+//			 request.method = Method.GET;
+//			 request.endpoint = "tracking_settings/click";
+//			 Response response = sg.api(request);
+//			 System.out.println(response.statusCode);
+//			 System.out.println(response.body);
+//			 System.out.println(response.headers);
+//		 } catch (IOException ex) {
+//			    throw ex;
+//		 }
+//		 
+//		 System.out.println("tracking open :");
+//		 try {
+//			 SendGrid sg = new SendGrid(apiKey);
+//			 Request request = new Request();
+//			 request.method = Method.GET;
+//			 request.endpoint = "tracking_settings/open";
+//			 Response response = sg.api(request);
+//			 System.out.println(response.statusCode);
+//			 System.out.println(response.body);
+//			 System.out.println(response.headers);
+//		 } catch (IOException ex) {
+//			    throw ex;
+//		 }
 		 
-		 System.out.println("tracking open :");
+		 System.out.println("Récupération des stats :");
 		 try {
-			 SendGrid sg = new SendGrid(apiKey);
-			 Request request = new Request();
-			 request.method = Method.GET;
-			 request.endpoint = "tracking_settings/open";
-			 Response response = sg.api(request);
-			 System.out.println(response.statusCode);
-			 System.out.println(response.body);
-			 System.out.println(response.headers);
-		 } catch (IOException ex) {
+			    SendGrid sg = new SendGrid(apiKey);
+			    Request request = new Request();
+			    request.method = Method.GET;
+			    request.endpoint = "stats";
+			    Map<String,String> queryParams = new HashMap<String, String>();
+			    queryParams.put("aggregated_by", "day");
+			    queryParams.put("start_date", "2016-07-01");
+			    queryParams.put("end_date", "2016-08-05");
+			    request.queryParams = queryParams;
+			    Response response = sg.api(request);
+			    System.out.println(response.statusCode);
+			    System.out.println(response.body);
+			    System.out.println(response.headers);
+
+			  } catch (IOException ex) {
 			    throw ex;
-		 }
+			  }
+		 
+
+		 
 	}
 }
