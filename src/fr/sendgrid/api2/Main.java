@@ -189,6 +189,7 @@ public class Main {
 //			    throw ex;
 //		 }
 		 
+		
 		 System.out.println("Récupération des stats :");
 		 try {
 			    SendGrid sg = new SendGrid(apiKey);
