@@ -188,7 +188,7 @@ public class Main {
 //		 } catch (IOException ex) {
 //			    throw ex;
 //		 }
-		 
+		
 		
 		 System.out.println("Récupération des stats :");
 		 try {
