@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import fr.sendgrid.api2.DAO.CsvFileHelperDao;
 import fr.sendgrid.api2.DAO.TxtFile;
+import fr.sendgrid.api2.domain.GlobalStatsElement;
 import fr.sendgrid.api2.domain.RecipientFromCsvFile;
+import fr.sendgrid.api2.domain.StatsService;
 import fr.sendgrid.api2.domain.Template;
+import fr.sendgrid.api2.domain.TemplateVersion;
 import fr.sendgrid.api2.domain.Webhook;
 import fr.sendgrid.api2.service.MailService;
 import fr.sendgrid.api2.service.RecipientService;
@@ -37,6 +40,9 @@ import com.sendgrid.TrackingSettings;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.xml.bind.annotation.XmlElementDecl.GLOBAL;
+
 import com.sendgrid.Method;
 import com.sendgrid.Request;
 import com.sendgrid.Response;
@@ -161,55 +167,13 @@ public class Main {
 		
 // 	Tous les GET TrackingSettings donnent une exception FORBIDEN EDIT : plus maintenant depuis l'intervention de greg. Mon postman etait apparemment "bugué" du coup impossible de me donner les permissions sur ma clé (à partir de postman car impossible avec l'api java)
 		
-		System.out.println("tracking click :");
-//		 try {	
-//			 SendGrid sg = new SendGrid(apiKey);
-//			 Request request = new Request();
-//			 request.method = Method.GET;
-//			 request.endpoint = "tracking_settings/click";
-//			 Response response = sg.api(request);
-//			 System.out.println(response.statusCode);
-//			 System.out.println(response.body);
-//			 System.out.println(response.headers);
-//		 } catch (IOException ex) {
-//			    throw ex;
-//		 }
-//		 
-//		 System.out.println("tracking open :");
-//		 try {
-//			 SendGrid sg = new SendGrid(apiKey);
-//			 Request request = new Request();
-//			 request.method = Method.GET;
-//			 request.endpoint = "tracking_settings/open";
-//			 Response response = sg.api(request);
-//			 System.out.println(response.statusCode);
-//			 System.out.println(response.body);
-//			 System.out.println(response.headers);
-//		 } catch (IOException ex) {
-//			    throw ex;
-//		 }
-		
-		
-		 System.out.println("Récupération des stats :");
-		 try {
-			    SendGrid sg = new SendGrid(apiKey);
-			    Request request = new Request();
-			    request.method = Method.GET;
-			    request.endpoint = "stats";
-			    Map<String,String> queryParams = new HashMap<String, String>();
-			    queryParams.put("aggregated_by", "day");
-			    queryParams.put("start_date", "2016-07-01");
-			    queryParams.put("end_date", "2016-08-05");
-			    request.queryParams = queryParams;
-			    Response response = sg.api(request);
-			    System.out.println(response.statusCode);
-			    System.out.println(response.body);
-			    System.out.println(response.headers);
-
-			  } catch (IOException ex) {
-			    throw ex;
-			  }
+		 System.out.println("Récupération des stats...");
 		 
+		 	StatsService statsService = new StatsService(apiKey);
+//		 	statsService.retrieveAllStats();
+		 	GlobalStatsElement[] stats;
+		 	stats = statsService.retrieveAllStats();
+			System.out.println("\nliste des stats : \n" + stats);
 
 		 
 	}
