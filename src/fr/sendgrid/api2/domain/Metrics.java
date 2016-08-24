@@ -1,32 +1,26 @@
 package fr.sendgrid.api2.domain;
 
 public class Metrics {
-	String blocks;
-	String bounce_drops;
-	String bounces;
-	String clicks;
-	String deferred;
-	String delivered;
-	String invalid_emails;
-	String opens;
-	String processed;
-	String requests;
-	String spam_report_drops;
-	String spam_reports;
-	String unique_clicks;
-	String unique_opens;
-	String unsubscribe_drops;
-	String unsubscribes;
+	int blocks;
+	int bounce_drops;
+	int bounces;
+	int clicks;
+	int deferred;
+	int delivered;
+	int invalid_emails;
+	int opens;
+	int processed;
+	int requests;
+	int spam_report_drops;
+	int spam_reports;
+	int unique_clicks;
+	int unique_opens;
+	int unsubscribe_drops;
+	int unsubscribes;
 	
-	public Metrics() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	
-	public Metrics(String blocks, String bounce_drops, String bounces, String clicks, String deferred, String delivered,
-			String invalid_emails, String opens, String processed, String requests, String spam_report_drops,
-			String spam_reports, String unique_clicks, String unique_opens, String unsubscribe_drops,
-			String unsubscribes) {
+	public Metrics(int blocks, int bounce_drops, int bounces, int clicks, int deferred, int delivered,
+			int invalid_emails, int opens, int processed, int requests, int spam_report_drops, int spam_reports,
+			int unique_clicks, int unique_opens, int unsubscribe_drops, int unsubscribes) {
 		super();
 		this.blocks = blocks;
 		this.bounce_drops = bounce_drops;
@@ -45,7 +39,7 @@ public class Metrics {
 		this.unsubscribe_drops = unsubscribe_drops;
 		this.unsubscribes = unsubscribes;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Metrics [blocks=" + blocks + ", bounce_drops=" + bounce_drops + ", bounces=" + bounces + ", clicks="
@@ -55,102 +49,139 @@ public class Metrics {
 				+ ", unique_opens=" + unique_opens + ", unsubscribe_drops=" + unsubscribe_drops + ", unsubscribes="
 				+ unsubscribes + "]";
 	}
-	
-	public String getBlocks() {
+
+	public int getBlocks() {
 		return blocks;
 	}
-	public void setBlocks(String blocks) {
+
+	public void setBlocks(int blocks) {
 		this.blocks = blocks;
 	}
-	public String getBounce_drops() {
+
+	public int getBounce_drops() {
 		return bounce_drops;
 	}
-	public void setBounce_drops(String bounce_drops) {
+
+	public void setBounce_drops(int bounce_drops) {
 		this.bounce_drops = bounce_drops;
 	}
-	public String getBounces() {
+
+	public int getBounces() {
 		return bounces;
 	}
-	public void setBounces(String bounces) {
+
+	public void setBounces(int bounces) {
 		this.bounces = bounces;
 	}
-	public String getClicks() {
+
+	public int getClicks() {
 		return clicks;
 	}
-	public void setClicks(String clicks) {
+
+	public void setClicks(int clicks) {
 		this.clicks = clicks;
 	}
-	public String getDeferred() {
+
+	public int getDeferred() {
 		return deferred;
 	}
-	public void setDeferred(String deferred) {
+
+	public void setDeferred(int deferred) {
 		this.deferred = deferred;
 	}
-	public String getDelivered() {
+
+	public int getDelivered() {
 		return delivered;
 	}
-	public void setDelivered(String delivered) {
+
+	public void setDelivered(int delivered) {
 		this.delivered = delivered;
 	}
-	public String getInvalid_emails() {
+
+	public int getInvalid_emails() {
 		return invalid_emails;
 	}
-	public void setInvalid_emails(String invalid_emails) {
+
+	public void setInvalid_emails(int invalid_emails) {
 		this.invalid_emails = invalid_emails;
 	}
-	public String getOpens() {
+
+	public int getOpens() {
 		return opens;
 	}
-	public void setOpens(String opens) {
+
+	public void setOpens(int opens) {
 		this.opens = opens;
 	}
-	public String getProcessed() {
+
+	public int getProcessed() {
 		return processed;
 	}
-	public void setProcessed(String processed) {
+
+	public void setProcessed(int processed) {
 		this.processed = processed;
 	}
-	public String getRequests() {
+
+	public int getRequests() {
 		return requests;
 	}
-	public void setRequests(String requests) {
+
+	public void setRequests(int requests) {
 		this.requests = requests;
 	}
-	public String getSpam_report_drops() {
+
+	public int getSpam_report_drops() {
 		return spam_report_drops;
 	}
-	public void setSpam_report_drops(String spam_report_drops) {
+
+	public void setSpam_report_drops(int spam_report_drops) {
 		this.spam_report_drops = spam_report_drops;
 	}
-	public String getSpam_reports() {
+
+	public int getSpam_reports() {
 		return spam_reports;
 	}
-	public void setSpam_reports(String spam_reports) {
+
+	public void setSpam_reports(int spam_reports) {
 		this.spam_reports = spam_reports;
 	}
-	public String getUnique_clicks() {
+
+	public int getUnique_clicks() {
 		return unique_clicks;
 	}
-	public void setUnique_clicks(String unique_clicks) {
+
+	public void setUnique_clicks(int unique_clicks) {
 		this.unique_clicks = unique_clicks;
 	}
-	public String getUnique_opens() {
+
+	public int getUnique_opens() {
 		return unique_opens;
 	}
-	public void setUnique_opens(String unique_opens) {
+
+	public void setUnique_opens(int unique_opens) {
 		this.unique_opens = unique_opens;
 	}
-	public String getUnsubscribe_drops() {
+
+	public int getUnsubscribe_drops() {
 		return unsubscribe_drops;
 	}
-	public void setUnsubscribe_drops(String unsubscribe_drops) {
+
+	public void setUnsubscribe_drops(int unsubscribe_drops) {
 		this.unsubscribe_drops = unsubscribe_drops;
 	}
-	public String getUnsubscribes() {
+
+	public int getUnsubscribes() {
 		return unsubscribes;
 	}
-	public void setUnsubscribes(String unsubscribes) {
+
+	public void setUnsubscribes(int unsubscribes) {
 		this.unsubscribes = unsubscribes;
 	}
+
+	public Metrics() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
 	
 }

@@ -1,4 +1,4 @@
-package fr.sendgrid.api2.domain;
+package fr.sendgrid.api2.service;
 import org.apache.commons.io.FileUtils;
 import org.apache.http.client.HttpResponseException;
 import org.json.JSONException;
@@ -6,12 +6,17 @@ import java.io.IOException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.sendgrid.Method;
 import com.sendgrid.Request;
 import com.sendgrid.Response;
 import com.sendgrid.SendGrid;
+
+import fr.sendgrid.api2.domain.GlobalStatsElement;
+import fr.sendgrid.api2.domain.RecipientFromSendgrid;
+
 import java.util.List;
 import java.util.Map;
 import java.io.IOException;
@@ -57,9 +62,10 @@ public class StatsService {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public GlobalStatsElement[] retrieveAllStats() throws Exception {
+	@SuppressWarnings("null")
+	public List<GlobalStatsElement> retrieveAllStats() throws Exception {
 		
-		GlobalStatsElement[] stats = null;
+		List<GlobalStatsElement> stats = new ArrayList<GlobalStatsElement>();
 		
 		try {
 			SendGrid sg = new SendGrid(this.apiKey);
@@ -76,16 +82,18 @@ public class StatsService {
 		    System.out.println(response.body);
 		    System.out.println(response.headers);
 		    
-		    
 		    Gson gson = new Gson();
 		    JsonParser parser = new JsonParser();
-		    JsonObject objetGlobalStatsElement = parser.parse(response.body).getAsJsonObject();
-		    JsonArray globalStatsElementJsonArray;
-		    globalStatsElementJsonArray = objetGlobalStatsElement.getAsJsonArray("");
-		    for (int i = 0; i < globalStatsElementJsonArray.size(); i++) {
-				GlobalStatsElement temp = gson.fromJson(globalStatsElementJsonArray.get(i), GlobalStatsElement.class);
-				stats[i]=temp;
+		    
+		    String newResponse = "{\"wrapper\":"+response.body+"}";
+		    
+		    JsonObject ObjetStats = parser.parse(newResponse).getAsJsonObject();
+		    JsonArray statsJsonArray= ObjetStats.getAsJsonArray("wrapper");
+		    for (int i = 0; i < statsJsonArray.size(); i++) {
+				GlobalStatsElement temp = gson.fromJson(statsJsonArray.get(i), GlobalStatsElement.class);
+				stats.add(temp);
 			}
+		    
 		} catch (IOException ex) {
 		    throw ex;
 		}

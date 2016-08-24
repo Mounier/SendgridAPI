@@ -1,15 +1,17 @@
 package fr.sendgrid.api2.domain;
 
+import java.util.Arrays;
+
 public class GlobalStatsElement {
-	String date;
-	Stats stats;
+	private String date;
+	private Stats[] stats;
 	
 	public GlobalStatsElement() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public GlobalStatsElement(String date, Stats stats) {
+	public GlobalStatsElement(String date, Stats[] stats) {
 		super();
 		this.date = date;
 		this.stats = stats;
@@ -17,7 +19,7 @@ public class GlobalStatsElement {
 
 	@Override
 	public String toString() {
-		return "GlobalStatsElement [date=" + date + ", stats=" + stats + "]";
+		return "GlobalStatsElement [date=" + date + ", stats=" + Arrays.toString(stats) + "]";
 	}
 
 	public String getDate() {
@@ -28,11 +30,11 @@ public class GlobalStatsElement {
 		this.date = date;
 	}
 
-	public Stats getStats() {
+	public Stats[] getStats() {
 		return stats;
 	}
 
-	public void setStats(Stats stats) {
+	public void setStats(Stats[] stats) {
 		this.stats = stats;
 	}
 	

@@ -7,12 +7,13 @@ import fr.sendgrid.api2.DAO.CsvFileHelperDao;
 import fr.sendgrid.api2.DAO.TxtFile;
 import fr.sendgrid.api2.domain.GlobalStatsElement;
 import fr.sendgrid.api2.domain.RecipientFromCsvFile;
-import fr.sendgrid.api2.domain.StatsService;
+import fr.sendgrid.api2.domain.Stats;
 import fr.sendgrid.api2.domain.Template;
 import fr.sendgrid.api2.domain.TemplateVersion;
 import fr.sendgrid.api2.domain.Webhook;
 import fr.sendgrid.api2.service.MailService;
 import fr.sendgrid.api2.service.RecipientService;
+import fr.sendgrid.api2.service.StatsService;
 import fr.sendgrid.api2.service.TemplateService;
 import fr.sendgrid.api2.service.WebhookService;
 import fr.sendgrid.api2.window.FenetreTemplate;
@@ -167,13 +168,44 @@ public class Main {
 		
 // 	Tous les GET TrackingSettings donnent une exception FORBIDEN EDIT : plus maintenant depuis l'intervention de greg. Mon postman etait apparemment "bugué" du coup impossible de me donner les permissions sur ma clé (à partir de postman car impossible avec l'api java)
 		
-		 System.out.println("Récupération des stats...");
-		 
-		 	StatsService statsService = new StatsService(apiKey);
-//		 	statsService.retrieveAllStats();
-		 	GlobalStatsElement[] stats;
-		 	stats = statsService.retrieveAllStats();
-			System.out.println("\nliste des stats : \n" + stats);
+		System.out.println("Récupération des stats...");
+		// Récupération des stats
+		StatsService statsService = new StatsService(apiKey);
+		List<GlobalStatsElement> globalStatsList = new ArrayList<GlobalStatsElement>();
+		globalStatsList = statsService.retrieveAllStats();
+		
+		System.out.println("globalStatsList : \n"+ globalStatsList+"\n");
+		System.out.println("Stats :");
+		for (GlobalStatsElement globalStatsElement : globalStatsList) {
+			Stats[] stats = globalStatsElement.getStats();
+			for (Stats stats2 : stats) {
+				if (stats2.getMetrics().getBlocks() != 0){
+					System.out.println(globalStatsElement.getDate()+" : "+ stats2.getMetrics().getBlocks() + " blocks");
+				}
+				if (stats2.getMetrics().getInvalid_emails() != 0){
+					System.out.println(globalStatsElement.getDate()+" : "+ stats2.getMetrics().getInvalid_emails() + " invalid_emails");
+				}
+				if (stats2.getMetrics().getSpam_report_drops() != 0){
+					System.out.println(globalStatsElement.getDate()+" : "+ stats2.getMetrics().getSpam_report_drops() + " spam_report_drops");
+				}
+				if (stats2.getMetrics().getSpam_reports() != 0){
+					System.out.println(globalStatsElement.getDate()+" : "+ stats2.getMetrics().getSpam_reports() + " spam_reports");
+				}
+				if (stats2.getMetrics().getUnsubscribe_drops() != 0){
+					System.out.println(globalStatsElement.getDate()+" : "+ stats2.getMetrics().getUnsubscribe_drops() + " unsubscribe_drops");
+				}
+				if (stats2.getMetrics().getUnsubscribes() != 0){
+					System.out.println(globalStatsElement.getDate()+" : "+ stats2.getMetrics().getUnsubscribes() + " unsubscribes");
+				}
+				if (stats2.getMetrics().getBounces() != 0){
+					System.out.println(globalStatsElement.getDate()+" : "+ stats2.getMetrics().getBounces() + " bounces");
+				}
+				if (stats2.getMetrics().getBounce_drops() != 0){
+					System.out.println(globalStatsElement.getDate()+" : "+ stats2.getMetrics().getBounce_drops() + " bounce_drops");
+				}
+			}
+		}
+		 	
 
 		 
 	}

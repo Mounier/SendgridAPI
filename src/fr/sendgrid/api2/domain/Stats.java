@@ -26,3 +26,4 @@ public class Stats {
 		return "Stats [metrics=" + metrics + "]";
 	}
 }
+
