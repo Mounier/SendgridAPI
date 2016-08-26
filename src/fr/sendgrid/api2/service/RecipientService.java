@@ -135,15 +135,15 @@ public class RecipientService {
 			Gson gson = new Gson();		
 			JsonParser parser = new JsonParser();
 			JsonObject ObjetRecipients = parser.parse(response.body).getAsJsonObject();
-			//	Ci dessus on a parsé le String response.body en objet json (dans la sortie json on peut voir que l'objet json qui "englobe" tout se nomme Recipients)
-			//	Ce "Recipients" contient une liste d'éléments. Nous avons définis notre objet Recipient par rapport à ces éléments
+			//	Ci dessus on a parsÃ© le String response.body en objet json (dans la sortie json on peut voir que l'objet json qui "englobe" tout se nomme Recipients)
+			//	Ce "Recipients" contient une liste d'Ã©lÃ©ments. Nous avons dÃ©finis notre objet Recipient par rapport Ã  ces Ã©lÃ©ments
 			JsonArray recipientJsonArray;
 			//	On stock ensuite le contenue (la liste des Recipients) de cet objet dans un JsonArray. 
 			recipientJsonArray = ObjetRecipients.getAsJsonArray("recipients");	//	dans le json le nom de l'objet contentant la liste est "Recipients"
-			//	Il ne reste plus qu'à parcourir le tableau json et récupérer chaque Recipient
+			//	Il ne reste plus qu'Ã  parcourir le tableau json et rÃ©cupÃ©rer chaque Recipient
 			for (int i = 0; i < recipientJsonArray.size(); i++) {
 				RecipientFromSendgrid temp = gson.fromJson(recipientJsonArray.get(i), RecipientFromSendgrid.class);
-				//	Une fois le Recipient récupéré du json, on le stock dans notre liste.
+				//	Une fois le Recipient rÃ©cupÃ©rÃ© du json, on le stock dans notre liste.
 				listRecipient.add(temp);
 			}
 			
@@ -163,11 +163,11 @@ public class RecipientService {
 		    request.endpoint = "suppression/blocks";
 		    Map<String,String> queryParams = new HashMap<String, String>();
 		    Calendar now = Calendar.getInstance();
-			long nowInSeconde = now.getTimeInMillis()/1000l;	// on divise par mille car time.getTIme() est en seconde or on veut des milli secondes
-			long beforeOneMonthInSeconde = (now.getTimeInMillis()/1000l) - 2588339;		// on soustrait la valeur du temps now par 2588339 qui correspond environ à 1 mois en millisecondes pour nous ramener 1 mois avant
+			long nowInSeconde = now.getTimeInMillis()/1000l;	// on divise par mille pour obtenir des secondes
+			long beforeOneMonthInSeconde = (now.getTimeInMillis()/1000l) - 2588339;		// on soustrait la valeur du temps now par 2588339 (1 mois en secondes)
 			queryParams.put("start_time", String.valueOf(beforeOneMonthInSeconde));
 			queryParams.put("end_time", String.valueOf(nowInSeconde));
-//		    queryParams.put("offset", "0");		// 0 pour le début de la liste
+//		    queryParams.put("offset", "0");		// 0 pour le dÃ©but de la liste
 //		    queryParams.put("limit", "300");	// 300 pour indiquer l'indice de la position ou on veut s'arreter
 		    request.queryParams = queryParams;
 		    Response response = sg.api(request);
@@ -187,11 +187,11 @@ public class RecipientService {
 			request.endpoint = "suppression/bounces";
 			Map<String,String> queryParams = new HashMap<String, String>();
 		    Calendar now = Calendar.getInstance();
-			long nowInSeconde = now.getTimeInMillis()/1000l;	// on divise par mille car time.getTIme() est en seconde or on veut des milli secondes
-			long beforeOneMonthInSeconde = (now.getTimeInMillis()/1000l) - 2588339;		// on soustrait la valeur du temps now par 2588339 qui correspond environ à 1 mois en millisecondes pour nous ramener 1 mois avant
+			long nowInSeconde = now.getTimeInMillis()/1000l;	// on divise par mille pour obtenir des secondes
+			long beforeOneMonthInSeconde = (now.getTimeInMillis()/1000l) - 2588339;		// on soustrait la valeur du temps now par 2588339 (1 mois en secondes)
 			queryParams.put("start_time", String.valueOf(beforeOneMonthInSeconde));
 			queryParams.put("end_time", String.valueOf(nowInSeconde));
-//		    queryParams.put("offset", "0");		// 0 pour le début de la liste
+//		    queryParams.put("offset", "0");		// 0 pour le dÃ©but de la liste
 //		    queryParams.put("limit", "300");	// 300 pour indiquer l'indice de la position ou on veut s'arreter
 		    request.queryParams = queryParams;
 			Response responseSpam = sg.api(request);
@@ -212,20 +212,12 @@ public class RecipientService {
 			request.endpoint = "suppression/invalid_emails";
 			Map<String, String> queryParams = new HashMap<String, String>();
 			Calendar now = Calendar.getInstance();
-			long nowInSeconde = now.getTimeInMillis() / 1000l;
-			/*
-			 * on divise par mille car time.getTIme() est en seconde or on veut
-			 * des milli secondes
-			 */
-			long beforeOneMonthInSeconde = (now.getTimeInMillis() / 1000l) - 2588339;
-			/*
-			 * on soustrait la valeur du temps now par 2588339 qui correspond
-			 * environ à 1 mois en millisecondes pour nous ramener 1 mois avant
-			 */
+			long nowInSeconde = now.getTimeInMillis() / 1000l; // on divise par mille pour obtenir des secondes
+			long beforeOneMonthInSeconde = (now.getTimeInMillis() / 1000l) - 2588339; // on soustrait la valeur du temps now par 2588339 (1 mois en secondes)
 			queryParams.put("start_time", String.valueOf(beforeOneMonthInSeconde));
 			// queryParams.put("limit", "300"); // 300 pour indiquer l'indice de la position ou on veut s'arreter
 			queryParams.put("end_time", String.valueOf(nowInSeconde));
-			// queryParams.put("offset", "0"); // 0 pour le début de la liste
+			// queryParams.put("offset", "0"); // 0 pour le dÃ©but de la liste
 			request.queryParams = queryParams;
 			Response responseInvalid = sg.api(request);
 			System.out.println(responseInvalid.statusCode);
@@ -244,12 +236,12 @@ public class RecipientService {
 			 request.endpoint = "suppression/spam_reports";
 			 Map<String,String> queryParams = new HashMap<String, String>();
 			 Calendar now = Calendar.getInstance();
-			 long nowInSeconde = now.getTimeInMillis()/1000l;	// on divise par mille car time.getTIme() est en seconde or on veut des milli secondes
-			 long oneMonthAgoInSeconde = (now.getTimeInMillis()/1000l) - 2588339;		// on soustrait la valeur du temps now par 2588339 qui correspond environ à 1 mois en millisecondes pour nous ramener 1 mois avant
+			 long nowInSeconde = now.getTimeInMillis()/1000l;	// on divise par mille pour obtenir des secondes
+			 long oneMonthAgoInSeconde = (now.getTimeInMillis()/1000l) - 2588339;	// on soustrait la valeur du temps now par 2588339 (1 mois en secondes)
 			 queryParams.put("start_time", String.valueOf(oneMonthAgoInSeconde));
 			 //queryParams.put("limit", "300"); // 300 pour indiquer l'indice de la position ou on veut s'arreter
 			 queryParams.put("end_time", String.valueOf(nowInSeconde));
-			 //queryParams.put("offset", "0");	// 0 pour le début de la liste
+			 //queryParams.put("offset", "0");	// 0 pour le dÃ©but de la liste
 			 request.queryParams = queryParams;
 			 Response responseSpam = sg.api(request);
 			 System.out.println(responseSpam.statusCode);
